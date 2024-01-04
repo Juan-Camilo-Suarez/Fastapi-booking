@@ -1,0 +1,29 @@
+creation first migrations.
+
+1. create alembic migration in side app
+CMD 'alembic init migrations'
+2. move alembic.ini to root project
+3. configure path for migration in alembic.ini
+'script_location = root/migrations'
+4. go to env.py in side of migration and add in metadate Base.metadate from file datebase.py
+'target_metadata = Base.metadata'
+5. go to env.py in side of migration and import model to do a migration
+'from app.hotels.models import Hotels'
+6. In file env.py add the new ubication of alembic.ini
+'sys.path.insert(0, dirname(dirname(dirname(abspath(__file__)))))'
+7. in file env.py added config to conecc with URL + async option
+'config.set_main_option("sqlalchemy.url", f"{DATABASE_URL}?async_fallback=True")'
+8. create initial migration "like make migrations"
+'sys.path.insert(0, dirname(dirname(dirname(abspath(__file__)))))'
+9. execute migration "like migrate in django"
+'alembic upgrade head'
+10.rollback migration # of rollbacks
+'alembic downgrade -1'
+
+
+
+
+
+
+
+

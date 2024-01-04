@@ -7,7 +7,7 @@ DB_USER = 'booking'
 DB_PASSWORD = 'booking'
 DB_NAME = 'booking'
 
-DATABASE_URL = f"postgresql+asyncp://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}"
+DATABASE_URL = f"postgresql+asyncpg://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}"
 
 engine = create_async_engine(DATABASE_URL)
 
@@ -19,4 +19,3 @@ async_session_maker = sessionmaker(engine, class_=AsyncSession, expire_on_commit
 # to compare status migrations
 class Base(DeclarativeBase):
     pass
- 
