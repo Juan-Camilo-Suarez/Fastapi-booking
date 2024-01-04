@@ -11,6 +11,6 @@ class Rooms(Base):
     name = Column(String, nullable=False)
     description = Column(String, nullable=False)
     price = Column(Integer, nullable=False)
-    service = Column(JSON, nullable=False)
+    services = Column(JSON, nullable=False)
     quantity = Column(Integer, nullable=False)
     image_id = Column(Integer)
