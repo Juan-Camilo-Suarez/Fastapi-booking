@@ -10,3 +10,5 @@
 ```pip install -r requirements.txt```
 4. Install DB from docker-Compose 
 ``` docker-compose up -d ```
+5. excute migrations that are in head
+``` alembic upgrade head ```

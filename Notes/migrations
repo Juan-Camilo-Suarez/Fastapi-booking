@@ -14,7 +14,7 @@ CMD 'alembic init migrations'
 7. in file env.py added config to conecc with URL + async option
 'config.set_main_option("sqlalchemy.url", f"{DATABASE_URL}?async_fallback=True")'
 8. create initial migration "like make migrations"
-'sys.path.insert(0, dirname(dirname(dirname(abspath(__file__)))))'
+' alembic revision --autogenerate -m "Initial migration"    '
 9. execute migration "like migrate in django"
 'alembic upgrade head'
 10.rollback migration # of rollbacks
