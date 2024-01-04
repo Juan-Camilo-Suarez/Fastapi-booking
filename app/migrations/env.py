@@ -7,7 +7,7 @@ from sqlalchemy import pool
 
 from alembic import context
 
-from app.database import Base, DATABASE_URL
+from app.database import Base, settings
 from app.hotels.models import Hotels
 
 # add this line to declarate that file alembic.init is on root
@@ -18,7 +18,7 @@ sys.path.insert(0, dirname(dirname(dirname(abspath(__file__)))))
 config = context.config
 
 # added config to connect with URL + async option
-config.set_main_option("sqlalchemy.url", f"{DATABASE_URL}?async_fallback=True")
+config.set_main_option("sqlalchemy.url", f"{settings.DATABASE_URL}?async_fallback=True")
 
 # Interpret the config file for Python logging.
 # This line sets up loggers basically.
