@@ -9,6 +9,9 @@ from alembic import context
 
 from app.database import Base, settings
 from app.hotels.models import Hotels
+from app.hotels.rooms.models import Rooms
+from app.bookings.models import Bookings
+from app.users.models import Users
 
 # add this line to declarate that file alembic.init is on root
 sys.path.insert(0, dirname(dirname(dirname(abspath(__file__)))))

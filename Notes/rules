@@ -1,0 +1,2 @@
+1. create a file config to read env
+2. create independent file for every DB postgrest, redis, etc
