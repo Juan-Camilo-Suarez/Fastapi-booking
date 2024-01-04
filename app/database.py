@@ -1,15 +1,25 @@
+from pydantic_settings import BaseSettings, SettingsConfigDict
 from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine
 from sqlalchemy.orm import DeclarativeBase, sessionmaker
 
-DB_HOST = 'localhost'
-DB_PORT = 5432
-DB_USER = 'booking'
-DB_PASSWORD = 'booking'
-DB_NAME = 'booking'
 
-DATABASE_URL = f"postgresql+asyncpg://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}"
+class Settings(BaseSettings):
+    DB_HOST: str
+    DB_PORT: int
+    DB_USER: str
+    DB_PASSWORD: str
+    DB_NAME: str
 
-engine = create_async_engine(DATABASE_URL)
+    @property
+    def DATABASE_URL(self):
+        return f"postgresql+asyncpg://{self.DB_USER}:{self.DB_PASS}@{self.DB_HOST}:{self.DB_PORT}/{self.DB_NAME}"
+
+    model_config = SettingsConfigDict(env_file=".env")
+
+
+settings = Settings()
+
+engine = create_async_engine(settings.DATABASE_URL)
 
 # session es la traccion(transccion es el conjunto de acciones que hacemos en la bd)
 
