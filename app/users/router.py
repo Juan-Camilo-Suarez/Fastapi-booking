@@ -7,6 +7,15 @@ from app.users.userDTO import UserAuthDTO
 router = APIRouter(
     prefix="/auth",
     tags=["Auth and users"],
+    # this for to add information to code responces in documentation
+    responses={
+        status.HTTP_401_UNAUTHORIZED: {
+            "description": "Response for not authorized user",
+        },
+        status.HTTP_403_FORBIDDEN: {
+            "description": "Response for user that not authorized",
+        },
+    }
 )
 
 
@@ -26,4 +35,4 @@ async def login_user(response: Response, user_data: UserAuthDTO):
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED)
     access_token = create_access_token({"sub": user.id})
     response.set_cookie("booking_access_token", access_token, httponly=True)
-    return access_token
+    return {"access_token": access_token}
