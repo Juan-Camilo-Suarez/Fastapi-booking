@@ -6,3 +6,4 @@ asyncpg
 pydantic-settings
 python-jose
 passlib
+pydantic[email]
