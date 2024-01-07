@@ -24,3 +24,13 @@ IncorrectFormTokenException = HTTPException(
 )
 
 UserIsNotPresentException = HTTPException(status_code=status.HTTP_401_UNAUTHORIZED)
+
+RoomFullyBooked = HTTPException(
+    status_code=status.HTTP_409_CONFLICT,
+    detail="Не осталось свободных номеров"
+)
+
+RoomCannotBeBookedException = HTTPException(
+    status_code=status.HTTP_409_CONFLICT,
+    detail="not have free space available"
+)
