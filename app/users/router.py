@@ -1,6 +1,8 @@
-from fastapi import APIRouter, HTTPException, status, Response
+from fastapi import APIRouter, HTTPException, status, Response, Depends
 
 from app.users.auth import get_password_hash, verify_password, authenticate_user, create_access_token
+from app.users.dependecies import get_current_user
+from app.users.models import Users
 from app.users.services import UserServices
 from app.users.userDTO import UserAuthDTO
 
@@ -41,3 +43,8 @@ async def login_user(response: Response, user_data: UserAuthDTO):
 @router.post("/logout")
 async def logout_user(response: Response):
     response.delete_cookie("booking_access_token")
+
+
+@router.get("/current_user")
+async def get_current_user(user: Users = Depends(get_current_user)):
+    return user
