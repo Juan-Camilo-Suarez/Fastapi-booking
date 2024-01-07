@@ -15,3 +15,8 @@ router = APIRouter(
 @router.get('')
 async def get_bookings(user: Users = Depends(get_current_user)):
     return await BookingService.find_all(user_id=user.id)
+
+@router.post('')
+async def add_bookings(user: Users = Depends(get_current_user)):
+    await BookingService.add(user_id=user.id)
+

@@ -28,7 +28,7 @@ async def register_user(user_data: UserAuthDTO):
     if existing_user:
         raise UserAlreadyExistsException
     hashed_password = get_password_hash(user_data.password)
-    await UserServices.add_user(email=user_data.email, hashed_password=hashed_password)
+    await UserServices.add(email=user_data.email, hashed_password=hashed_password)
 
 
 @router.post("/login")
