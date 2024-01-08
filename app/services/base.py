@@ -9,9 +9,16 @@ class BaseServices:
 
     # classmehtod para no tener que crear una instacia cada vez que se quiera usar el metodo
     @classmethod
-    async def find_all(cls, **filter_by):
+    async def find_all_filters(cls, **filter_by):
         async with async_session_maker() as session:
             query = select(cls.model.__table__.columns).filter_by(**filter_by)
+            result = await session.execute(query)
+            return result.mappings().all()
+
+    @classmethod
+    async def find_all(cls):
+        async with async_session_maker() as session:
+            query = select(cls.model.__table__.columns)
             result = await session.execute(query)
             return result.mappings().all()
 
