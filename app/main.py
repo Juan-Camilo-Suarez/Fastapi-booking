@@ -22,3 +22,18 @@ app.include_router(router_hotels_rooms)
 
 # this routeres for frontend
 app.include_router(router_pages)
+
+# CORS config way to give access one domain work with our api and what permissions
+# origins = [
+#     # 3000 - порт, на котором работает фронтенд на React.js
+#     "http://localhost:3000",
+# ]
+#
+# app.add_middleware(
+#     CORSMiddleware,
+#     allow_origins=origins,
+#     allow_credentials=True,
+#     allow_methods=["GET", "POST", "OPTIONS", "DELETE", "PATCH", "PUT"],
+#     allow_headers=["Content-Type", "Set-Cookie", "Access-Control-Allow-Headers",
+#                    "Access-Control-Allow-Origin", "Authorization"],
+# )
