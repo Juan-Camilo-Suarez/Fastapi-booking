@@ -6,11 +6,15 @@ from app.users.router import router as router_users
 from app.hotels.router import router as router_hotels
 from app.hotels.rooms.router import router as router_hotels_rooms
 from app.pages.router import router as router_pages
+from app.images.router import router as router_images
 
 app = FastAPI()
 # endpoint to get avaliable pictures(this create independent app)
 app.mount('/static', StaticFiles(directory='app/static'), 'static')
+# endpoint to upload pictures and files
+app.include_router(router_images)
 
+# common endpoint
 app.include_router(router_users)
 app.include_router(router_bookings)
 app.include_router(router_hotels)
