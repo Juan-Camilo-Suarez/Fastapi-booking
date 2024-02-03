@@ -9,3 +9,5 @@ passlib
 pydantic[email]
 Jinja2
 fastapi-cache2[redis]
+celery
+pillow
