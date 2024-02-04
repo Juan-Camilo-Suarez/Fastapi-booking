@@ -3,6 +3,7 @@ from fastapi.staticfiles import StaticFiles
 from fastapi_cache import FastAPICache
 from fastapi_cache.backends.redis import RedisBackend
 from fastapi_cache.decorator import cache
+from contextlib import asynccontextmanager
 
 from redis import asyncio as aioredis
 
@@ -14,7 +15,21 @@ from app.hotels.rooms.router import router as router_hotels_rooms
 from app.pages.router import router as router_pages
 from app.images.router import router as router_images
 
-app = FastAPI()
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    # before excute app
+    print("start app")
+    redis = aioredis.from_url(f"redis://{settings.REDIS_HOST}:{settings.REDIS_PORT}")
+    FastAPICache.init(RedisBackend(redis), prefix="cache")
+    yield
+    # after excute app
+
+
+app = FastAPI(
+    title="bookings",
+    lifespan=lifespan
+)
 # endpoint to get avaliable pictures(this create independent app)
 app.mount('/static', StaticFiles(directory='app/static'), 'static')
 # endpoint to upload pictures and files
@@ -50,8 +65,7 @@ app.include_router(router_pages)
 async def index():
     return dict(hello="world")
 
-
-@app.on_event("startup")
-async def startup():
-    redis = aioredis.from_url(f"redis://{settings.REDIS_HOST}:{settings.REDIS_PORT}")
-    FastAPICache.init(RedisBackend(redis), prefix="cache")
+# @app.on_event("startup")
+# async def startup():
+#     redis = aioredis.from_url(f"redis://{settings.REDIS_HOST}:{settings.REDIS_PORT}")
+#     FastAPICache.init(RedisBackend(redis), prefix="cache")
